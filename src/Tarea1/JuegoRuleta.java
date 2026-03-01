@@ -15,7 +15,7 @@ public class JuegoRuleta {
 	public void iniciarJuego(){
 		
 		
-	
+
 		System.out.println("\nRecharge your balance to start playing: ");
 		
 		do {
