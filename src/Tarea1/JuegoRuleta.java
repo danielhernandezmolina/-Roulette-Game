@@ -10,87 +10,87 @@ public class JuegoRuleta {
 	private int cantidadApostada;
 	Scanner entrada = new Scanner (System.in);
 	
-	// PRIMERA PARTE SOLICITAR RECARGA DE SALDO
+	// PART ONE: REQUEST BALANCE
 		
 	public void iniciarJuego(){
 		
 		
 	
-		System.out.println("\nRecarga tu saldo para empezar a jugar: ");
+		System.out.println("\nRecharge your balance to start playing: ");
 		
 		do {
 			
 			try {
 				saldo = entrada.nextInt();
 			
-			if(saldo>0) {System.out.println("\nEl saldo ha sido ingresado con exito! Tienes ingresado en este momento " + saldo + " euros en tu cuenta!");}
-			else {System.out.println("\nERROR!!= INTRODUZCA UNA CANTIDAD SUPERIOR A 0");}
+			if(saldo>0) {System.out.println("\nBalance successfully added! You currently have " + saldo + " euros in your account!");}
+			else {System.out.println("\nERROR!!= PLEASE ENTER AN AMOUNT GREATER THAN 0");}
 			
-			//Red de seguridad por si el usuario pone algo que no sea un numero entero
-			} catch (Exception e) {System.out.println("\nError: Debes introducir un número entero.");
+			// Safety net in case the user enters something other than an integer
+			} catch (Exception e) {System.out.println("\nError: You must enter an integer number.");
                 entrada.next(); 
                 saldo = -1; 
 			}
-		// Se repetirá mientras el numero introducido sea igual o menor a 0
+		// It will repeat as long as the entered number is equal to or less than 0
 		} while (saldo <= 0);
 						
 		}
 	
-	// SEGUNDA PARTE SOLICITAR CANTIDAD A APOSTAR
+	// PART TWO: REQUEST AMOUNT TO BET
 	
 	public void realizarApuesta() {
         boolean apuestaValida = false;
 
         do {
-            System.out.println("\nIntroduce cantidad que desea apostar:");
+            System.out.println("\nEnter the amount you want to bet:");
             try {
                 cantidadApostada = entrada.nextInt();
                 
                 
-                //Mirar si es negativo
+                // Check if it's negative
 
                 if (cantidadApostada <= 0) {
-                    System.out.println("\nERROR!!= INTRODUZCA UNA CANTIDAD SUPERIOR A 0");}
+                    System.out.println("\nERROR!!= PLEASE ENTER AN AMOUNT GREATER THAN 0");}
                 
-                //Si no es negativo miramos el saldo
-                else if(cantidadApostada > saldo) { System.out.println("ERROR!!= No tienes suficiente saldo. Tu saldo es de " + saldo + " euros");}
+                // If it's not negative, check the balance
+                else if(cantidadApostada > saldo) { System.out.println("ERROR!!= Not enough balance. Your balance is " + saldo + " euros");}
 
-                //Si pasa los dos filtros es true y por lo tanto sale del bucle
+                // If it passes both filters, it's true and therefore exits the loop
                  else {
                     apuestaValida = true; 
                 }
-                // Aparece este error si el juego explota porque los datos que ponga el usuario no sean numericos
+                // This error appears if the game crashes because the data entered by the user is not numeric
 
             } catch (Exception e) {
-                System.out.println("\nError: Debes introducir un número válido.");
+                System.out.println("\nError: You must enter a valid number.");
                 entrada.next(); 
             }
             
-            //Se repetira mientras la apuesta no sea valida.
+            // It will repeat as long as the bet is not valid.
         } while (!apuestaValida); 
         
-        // TERCERA PARTE TIPO DE APUESTA
+        // PART THREE: TYPE OF BET
         
-        // HAGO UN ESTRUCTURA DE TRY-CATCH POR SI EL USUARIO PONE PARAMETROS NO VALIDOS COMO NUMEROS SUPERIORES A 2 O PALABRAS.
+        // I CREATED A TRY-CATCH STRUCTURE IN CASE THE USER ENTERS INVALID PARAMETERS LIKE NUMBERS GREATER THAN 2 OR WORDS.
         
         do {
         	
         	apuestaValida = false;
         try {
 		
-		System.out.println("\n\nSeleccione tipo de apuesta presionando (1 o 2):\n\n1. Número(1-36)\n2. Par/Impar ");
+		System.out.println("\n\nSelect the type of bet by pressing (1 or 2):\n\n1. Number (1-36)\n2. Even/Odd ");
 		
 		tipoDeApuesta = entrada.nextInt();
 		
 		if(tipoDeApuesta == 1 || tipoDeApuesta == 2  ) { apuestaValida = true;
 		
 		} else {
-            System.out.println("Error: Por favor, elija solo la opción 1 o la 2.");
+            System.out.println("Error: Please choose only option 1 or 2.");
             apuestaValida = false; 
 		}
 		
         } catch (Exception e) {
-            System.out.println("\nError: Debes introducir un número válido.");
+            System.out.println("\nError: You must enter a valid number.");
             entrada.next(); }
         
         } while (!apuestaValida); 
@@ -99,7 +99,7 @@ public class JuegoRuleta {
 		
 		switch (tipoDeApuesta) {
 		
-		//TIPO DE APUESTA POR NUMEROS SIMPLES 1 AL 36
+		// TYPE OF BET FOR SINGLE NUMBERS 1 TO 36
 		
 		case 1: 
 			int numeroApostado=-1;
@@ -111,58 +111,58 @@ public class JuegoRuleta {
 				if (saldo<=0) {revisarSaldo();}
 				numeroRuleta = tirarRuleta();
 				apuestaValida = false; 
-	        do {
-	            try {
-	                System.out.println("\nElije un número del 0 al 36");
-	                numeroApostado = entrada.nextInt();
-	                
+        do {
+            try {
+                System.out.println("\nChoose a number from 0 to 36");
+                numeroApostado = entrada.nextInt();
+                
 
-	                if (numeroApostado >= 0 && numeroApostado <= 36) {
-	                    apuestaValida = true; 
-	                } else {
-	                    System.out.println("Error: El número debe ser entre 0 y 36.");
-	                    apuestaValida = false;
-	                }
-	            
+                if (numeroApostado >= 0 && numeroApostado <= 36) {
+                    apuestaValida = true; 
+                } else {
+                    System.out.println("Error: The number must be between 0 and 36.");
+                    apuestaValida = false;
+                }
+            
 
-	            } catch (Exception e) {
-	                 System.out.println("\nError: Debes introducir un número válido.");
-	                 entrada.next(); 
-	                 apuestaValida = false;
-	            }
-	        } while (!apuestaValida);
+            } catch (Exception e) {
+                 System.out.println("\nError: You must enter a valid number.");
+                 entrada.next(); 
+                 apuestaValida = false;
+            }
+        } while (!apuestaValida);
 			
-		System.out.println("\nSalió el número " + numeroRuleta);	
+		System.out.println("\nThe number " + numeroRuleta + " came up");	
 		
-		// SI GANA SUMAMOS X 36 LO APOSTADO Y LO SUMO AL SALDO
+		// IF THEY WIN, MULTIPLY THE BET BY 36 AND ADD IT TO THE BALANCE
 			
 		if (numeroApostado == numeroRuleta) { saldo = saldo + cantidadApostada * 36;
 			
-			System.out.println("\nGanaste!!! Tu saldo actual es de " + saldo + " euros");
+			System.out.println("\nYou won!!! Your current balance is " + saldo + " euros");
 		}
 		
-		// SI PIERDE LE RESTO AL SALDO LA CANTIDAD APOSTADA
+		// IF THEY LOSE, SUBTRACT THE BET AMOUNT FROM THE BALANCE
 		
 		else { saldo = saldo - cantidadApostada;
 			
-			System.out.println("\nPerdiste :( Tu saldo actual es de " + saldo + " euros\n");
+			System.out.println("\nYou lost :( Your current balance is " + saldo + " euros\n");
 		}
 		
 		if (!revisarSaldo()) break;
 		
-		System.out.println("¿Quieres apostar a otro número? (s/n): ");
+		System.out.println("Do you want to bet on another number? (s/n): ");
         respuesta1 = entrada.next();
         
 
 			
-		// SI LA RESPUESTA ES S INDEPENDIENTEMENTE MAYUSCULA O MINUSCULA Y EL SALDO SEA SUPERIOR A 0 SE REPITE EL BUCLE SI ES CUALQUIER OTRA COSA
-		// LANZO MENSAJE DE DESPEDIDA.
+		// IF THE ANSWER IS 'S' REGARDLESS OF UPPERCASE OR LOWERCASE AND THE BALANCE IS GREATER THAN 0, THE LOOP REPEATS. IF IT IS ANYTHING ELSE
+		// DISPLAY GOODBYE MESSAGE.
 			
 		}while (respuesta1.equalsIgnoreCase("s") && saldo > 0);
 					
 		break;
 			
-		// TIPO DE APUESTA PAR O IMPAR
+		// TYPE OF BET EVEN OR ODD
 		
 		case 2: 
 			
@@ -180,20 +180,20 @@ public class JuegoRuleta {
 			
 			try {
 			
-			System.out.println("\n¿A qué quieres apostar?(1 o 2) \n1. PAR \n2. IMPAR");
+			System.out.println("\nWhat do you want to bet on? (1 or 2) \n1. EVEN \n2. ODD");
 			
 			eleccionUsuario = entrada.nextInt();
 			
 			if(eleccionUsuario == 1 || eleccionUsuario == 2  ){apuestaValida = true;
 			
 			} else {
-	            System.out.println("Error: Por favor, elija solo la opción 1 o la 2.");
-	            apuestaValida = false;} 
+            System.out.println("Error: Please choose only option 1 or 2.");
+            apuestaValida = false;} 
 			}catch (Exception e) {
-	            System.out.println("\nError: Debes introducir un número válido.");
-	            entrada.next(); 
-	            
-	            apuestaValida = false;}
+            System.out.println("\nError: You must enter a valid number.");
+            entrada.next(); 
+            
+            apuestaValida = false;}
 			
 			} while (!apuestaValida); 
 			
@@ -202,65 +202,65 @@ public class JuegoRuleta {
 			respuesta2=entrada.nextLine();
 			
 			
-			// Utilizamos % para saber si el numero que sale en la ruleta es PAR O IMPAR 
+			// We use % to determine if the number from the roulette is EVEN OR ODD 
 			
-			if (numeroRuleta2 == 0) { System.out.println("\n¡Ha salido el 0! La banca gana.\nPierdes: " + cantidadApostada + " euros\n¿Quieres volver a apostar? (s/n):");
+			if (numeroRuleta2 == 0) { System.out.println("\n0 came up! The house wins.\nYou lose: " + cantidadApostada + " euros\nDo you want to bet again? (s/n):");
 			respuesta2 = entrada.nextLine();
 			
-			// SI ES EL RESTO DA IGUAL A 0 SIGNIFICA QUE EL NUMERO ES PAR
+			// IF THE REMAINDER IS EQUAL TO 0 IT MEANS THE NUMBER IS EVEN
 			  
 			} else if (numeroRuleta2 % 2 == 0 && eleccionUsuario == 1){saldo = saldo + cantidadApostada * 2;
-				System.out.println("\n¡El número es PAR! ¡GANASTE SALIÓ EL NÚMERO " + numeroRuleta2 + "!" + " Tu saldo actual es de " + saldo + " euros.\n¿Quieres volver a apostar? (s/n):" );
+				System.out.println("\nThe number is EVEN! YOU WON, THE NUMBER " + numeroRuleta2 + " CAME UP!" + " Your current balance is " + saldo + " euros.\nDo you want to bet again? (s/n):" );
 				respuesta2 = entrada.nextLine();}
 			
-			// SI ES EL RESTO DA IGUAL A 1 SIGNIFICA QUE EL NUMERO ES IMPAR
+			// IF THE REMAINDER IS EQUAL TO 1 IT MEANS THE NUMBER IS ODD
 			    
 			 else if (numeroRuleta2 % 2 != 0 && eleccionUsuario == 2) {saldo = saldo + cantidadApostada * 2;
-				 System.out.println("\n¡El número es IMPAR! ¡GANASTE SALIÓ EL NÚMERO " + numeroRuleta2 + "!" + " Tu saldo actual es de " + saldo + " euros\n¿Quieres volver a apostar? (s/n):");
+				 System.out.println("\nThe number is ODD! YOU WON, THE NUMBER " + numeroRuleta2 + " CAME UP!" + " Your current balance is " + saldo + " euros\nDo you want to bet again? (s/n):");
 				 respuesta2 = entrada.nextLine();}
 			
 			 else {saldo = saldo - cantidadApostada;
-			        System.out.println("\nLo siento, perdiste... salió el número " + numeroRuleta2 + "\nPierdes: " + cantidadApostada + " euros.\n¿Quieres volver a apostar? (s/n):");
-			        
-			        respuesta2 = entrada.nextLine();
-			        }
+                System.out.println("\nI'm sorry, you lost... the number " + numeroRuleta2 + " came up\nYou lose: " + cantidadApostada + " euros.\nDo you want to bet again? (s/n):");
+                
+                respuesta2 = entrada.nextLine();
+                }
 						
 			if (!revisarSaldo()) break;
-			// SI LA RESPUESTA ES S INDEPENDIENTEMENTE MAYUSCULA O MINUSCULA Y EL SALDO SEA SUPERIOR A 0 SE REPITE EL BUCLE SI ES CUALQUIER OTRA COSA
-			// LANZO MENSAJE DE DESPEDIDA.
+			// IF THE ANSWER IS 'S' REGARDLESS OF UPPERCASE OR LOWERCASE AND THE BALANCE IS GREATER THAN 0, THE LOOP REPEATS. IF IT IS ANYTHING ELSE
+		    // DISPLAY GOODBYE MESSAGE.
 			
 			}while (respuesta2.equalsIgnoreCase("s") && saldo > 0);}
 		
-		System.out.println("\n\nMuchas gracias por jugar en: LA RULETA DE LA SUERTE!! Su saldo final es de " + saldo + " euros");
+		System.out.println("\n\nThank you very much for playing: THE WHEEL OF FORTUNE!! Your final balance is " + saldo + " euros");
 		
 		
 			
 		}
 
 	
-	// Añado un pequeño método auxiliar para comprobar cuando el usuario se queda sin saldo y le pregunta si quiere recargar.
+	// I'm adding a small auxiliary method to check when the user runs out of balance and ask if they want to recharge.
 	
 	public boolean revisarSaldo() {	
 		
 		
 		if (saldo>0) return true;
 			
-			System.out.println("\n--- ¡TE HAS QUEDADO SIN SALDO! ---");
-	        System.out.println("\n¿Quieres recargar saldo para seguir jugando? (s/n): ");
-	        String respuesta3 = entrada.next();
-	        
-	     // Llama al método para pedir dinero
-	        
+			System.out.println("\n--- YOU HAVE RUN OUT OF BALANCE! ---");
+        System.out.println("\nDo you want to recharge your balance to keep playing? (s/n): ");
+        String respuesta3 = entrada.next();
+        
+     // Calls the method to ask for money
+        
 		if (respuesta3.equalsIgnoreCase("s")) { iniciarJuego(); 
-		return true;} // Devuelve true cuando ha recargado
+		return true;} // Returns true when recharged
 	
-	    else { System.out.println("\n\nMuchas gracias por jugar en: LA RULETA DE LA SUERTE!! Su saldo final es de " + saldo + " euros");}
-		return false;} // Devuelve false cuando no ha recargado
+    else { System.out.println("\n\nThank you very much for playing: THE WHEEL OF FORTUNE!! Your final balance is " + saldo + " euros");}
+		return false;} // Returns false when not recharged
 
 
 		
 		
-	//METODO DE TIRAR A LA RULETA QUE SE NOS DIO COMO AYUDA EN LA TAREA. 
+	// METHOD TO SPIN THE ROULETTE GIVEN AS HELP IN THE ASSIGNMENT. 
 		
 	public int tirarRuleta() {
 		 
@@ -270,7 +270,5 @@ public class JuegoRuleta {
 	
 
 	}
-	
-
 
 
