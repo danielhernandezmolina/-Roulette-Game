@@ -7,7 +7,7 @@ public class Principal {
 		
 		JuegoRuleta juego = new JuegoRuleta();
 		
-		System.out.println("------BIENVENIDO A LA RULETA DE LA SUERTE------");
+		System.out.println("------WELCOME TO THE WHEEL OF FORTUNE------");
 		
 		juego.iniciarJuego();
 		juego.realizarApuesta();
