@@ -4,7 +4,7 @@
 
 2. Code Structure
 I've organized the project into two main classes:
-1. Main.java: This class contains the main method. Its sole function is to create a GameRoulette object and call the method to start the game. I've also added System.out.println("------
+1. Main.java: This class contains the main method. Its function is to create a GameRoulette object and call the method to start the game. I've also added System.out.println("------
 WELCOME TO THE WHEEL OF FORTUNE------"); so that when the user repeats the loop, they don't repeatedly encounter the start screen and instead jump directly to asking if they want to add funds.
 
 2. GameRoulette.java: This is where all the logic resides. I've defined private attributes such as the balance (to store the player's money) and the Scanner (to read the keyboard). In addition to the methods:
