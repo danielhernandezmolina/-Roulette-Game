@@ -13,7 +13,8 @@ WELCOME TO THE WHEEL OF FORTUNE------"); so that when the user repeats the loop,
 `spinRoulette()`, I've also added a small auxiliary method to check if the user's balance reaches 0 and ask if they want to reload to continue playing. I've called this method `checkBalance()`.
 
 3. Step-by-Step Operation
-1. Starting and Reloading the Balance
+   
+a. Starting and Reloading the Balance
 The first thing I programmed is the `startGame()` method, which requests the initial deposit using a do-while loop and, inside it, a try-catch block to force the user to enter a valid amount. Inside the loop:
 
 • I use a try-catch block to catch errors if the user enters letters.
@@ -22,11 +23,11 @@ The first thing I programmed is the `startGame()` method, which requests the ini
 
 • With an `if` statement, I check if the value is less than or equal to 0. If so, I display a message saying that it must be greater than 0, and the loop repeats.
 
-2. The Core of the Game: Placing a Bet
+b. The Core of the Game: Placing a Bet
 Once we have a balance, we enter the placeAbet() method. This entire process is within a main do-while loop that keeps the game active.
 Validating the Bet Amount: I use another loop to ask how much you want to bet. If you enter a negative amount or an amount greater than your balance, the program will ask you again..
 
-3. Game Menu:
+c. Game Menu:
 I offer a choice between two modes using a switch:
 • Option 1 (Bet on a number): I ask for a number from 0 to 36. I have protected this input with a loop and a try-catch block to ensure that the number is valid and within the range. If the player guesses the number that comes up, I multiply their bet by 36 and add it to their balance.
 
